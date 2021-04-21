@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_afrik/widgets/TextFormFieldDecoration.dart';
 
 class Register extends StatefulWidget {
+  const Register({Key key}) : super(key: key);
+
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -41,20 +44,28 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(children: [
-        Text('Inscription'),
-        Text('Ajoutez les informations d\'inscription'),
-        ...fields
-            .map((field) => TextField(
-                  keyboardType: field['type'],
-                ))
-            .toList(),
-        TextButton(
-          onPressed: register,
-          child: Text('Inscription'),
-        ),
-      ]),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(children: [
+          Text('Inscription'),
+          Text('Ajoutez les informations d\'inscription'),
+          Form(
+              child: Column(children: [
+            ...fields
+                .map((field) => TextFormField(
+                      keyboardType: field['type'],
+                      decoration: TextFormFieldDecoration(
+                        labelText: field['name'],
+                      ),
+                    ))
+                .toList(),
+            ElevatedButton(
+              onPressed: register,
+              child: Text('Inscription'),
+            ),
+          ]))
+        ]),
+      ),
     );
   }
 

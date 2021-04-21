@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
+  const Login({Key key}) : super(key: key);
+
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   List<Map<String, Object>> fields = [
     {
       'name': 'Email',
@@ -21,44 +25,53 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Text('Connexion'),
-          Text('Entrez vos informations de connexion'),
-          ...fields
-              .map((field) => TextField(
-                    keyboardType: field['type'],
-                  ))
-              .toList(),
-          TextButton(
-            child: Text('Connectez-vous'),
-            onPressed: login,
-          ),
-          GestureDetector(
-            child: Text('Avez-vous oublié votre mot de passe?'),
-            onTap: forgotPassword,
-          ),
-          Text('Connectez-vous avec'),
-          TextButton(
-            child: Row(
-              children: [
-                Icon(Icons.ac_unit /* facebbok logo */),
-                Text('Connexion avec Facebook')
-              ],
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Text('Connexion'),
+            Text('Entrez vos informations de connexion'),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  ...fields
+                      .map((field) => TextFormField(
+                            keyboardType: field['type'],
+                          ))
+                      .toList(),
+                  ElevatedButton(
+                    child: Text('Connectez-vous'),
+                    onPressed: login,
+                  ),
+                ],
+              ),
             ),
-            onPressed: () => loginWithService(),
-          ),
-          TextButton(
-            child: Row(
-              children: [
-                Icon(Icons.ac_unit /* instagram logo */),
-                Text('Connexion avec Instagram')
-              ],
+            TextButton(
+              child: Text('Avez-vous oublié votre mot de passe?'),
+              onPressed: forgotPassword,
             ),
-            onPressed: () => loginWithService(),
-          ),
-        ],
+            Text('Connectez-vous avec'),
+            ElevatedButton(
+              child: Row(
+                children: [
+                  Icon(Icons.ac_unit /* facebbok logo */),
+                  Text('Connexion avec Facebook')
+                ],
+              ),
+              onPressed: () => loginWithService(),
+            ),
+            ElevatedButton(
+              child: Row(
+                children: [
+                  Icon(Icons.ac_unit /* instagram logo */),
+                  Text('Connexion avec Instagram')
+                ],
+              ),
+              onPressed: () => loginWithService(),
+            ),
+          ],
+        ),
       ),
     );
   }

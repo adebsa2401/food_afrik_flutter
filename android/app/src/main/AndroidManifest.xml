@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.food_afrik">
    <application
-        android:label="food_afrik"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Food Afrik"
+        android:icon="@mipmap/logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -25,7 +25,7 @@
                  Flutter's first frame. -->
             <meta-data
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
-              android:resource="@drawable/launch_background"
+              android:resource="@mipmap/splash"
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
